@@ -1,0 +1,35 @@
+name: Next.js security boundaries
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  next-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.2.0
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts --filter next-auth-app... --filter docs... --filter next-auth...
+      - name: Install independent examples
+        run: |
+          pnpm --dir apps/examples/nextjs-pages install --ignore-workspace --frozen-lockfile --ignore-scripts
+          pnpm --dir apps/examples/nextjs install --ignore-workspace --frozen-lockfile --ignore-scripts
+          pnpm --dir apps/examples/qwik install --ignore-workspace --frozen-lockfile --ignore-scripts
+      - name: Verify installed framework and native image boundaries
+        run: pnpm test:next-security
+      - name: Verify standalone Qwik build-image transforms
+        run: node scripts/verify-qwik-images.mjs

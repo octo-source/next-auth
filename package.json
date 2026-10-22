@@ -26,7 +26,8 @@
     "release": "release",
     "peek": "pnpm release --peek",
     "version:pr": "node ./config/version-pr",
-    "setup-fw-integration": "pnpm clean --filter=@auth/frameworks-template && node packages/utils/scripts/setup-fw-integration.js"
+    "setup-fw-integration": "pnpm clean --filter=@auth/frameworks-template && node packages/utils/scripts/setup-fw-integration.js",
+    "test:next-security": "node scripts/verify-next-security.mjs"
   },
   "devDependencies": {
     "@actions/core": "^1.10.0",
@@ -58,10 +59,11 @@
     "typescript-eslint": "^8.3.0",
     "utils": "workspace:*",
     "vite": "^5.1.8",
-    "vitest": "1.2.2"
+    "vitest": "1.2.2",
+    "sharp": "0.35.5"
   },
   "engines": {
-    "node": "^18.18.0 || ^20.8.0 || ^22.0.0"
+    "node": ">=22.23.4 <23 || >=24.22.1 <25"
   },
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771",
   "funding": [
@@ -85,7 +87,8 @@
   },
   "pnpm": {
     "overrides": {
-      "mailparser": "3.6.6"
+      "mailparser": "3.6.6",
+      "sharp": "0.35.5"
     },
     "patchedDependencies": {
       "@balazsorban/monorepo-release@0.5.1": "patches/@balazsorban__monorepo-release@0.5.1.patch"

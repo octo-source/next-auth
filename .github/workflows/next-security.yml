@@ -20,8 +20,6 @@ jobs:
         with:
           node-version-file: .nvmrc
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9.2.0
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts --filter next-auth-app... --filter docs... --filter next-auth...
       - name: Install independent examples

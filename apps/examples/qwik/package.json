@@ -2,7 +2,7 @@
   "name": "qwik-example-app",
   "description": "An example project for Auth.js with Qwik",
   "engines": {
-    "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
+    "node": ">=22.23.4 <23 || >=24.22.1 <25"
   },
   "engines-annotation": "Mostly required by sharp which needs a Node-API v9 compatible runtime",
   "private": true,
@@ -28,7 +28,7 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@auth/qwik": "latest",
+    "@auth/qwik": "0.2.2",
     "@builder.io/qwik": "^1.5.7",
     "@builder.io/qwik-city": "^1.5.7",
     "@types/eslint": "^8.56.10",
@@ -47,5 +47,11 @@
     "vercel": "^29.1.1",
     "vite": "^5.2.10",
     "vite-tsconfig-paths": "^4.2.1"
-  }
+  },
+  "pnpm": {
+    "overrides": {
+      "sharp": "0.35.5"
+    }
+  },
+  "packageManager": "pnpm@9.2.0"
 }
